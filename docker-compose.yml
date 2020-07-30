@@ -1,0 +1,50 @@
+# Docker Compose file for OSGi µServices demo
+version: '3.3'
+services:
+  zookeeper-instance:
+      image: zookeeper:3.6.1
+      restart: always
+      hostname: zookeeper-instance
+      ports:
+        - 2181:2181
+        - 9080:8080
+      healthcheck:
+        test: ["CMD-SHELL", "wget http://zookeeper-instance:8080/commands && echo 'OK'"]
+        interval: 5s
+        timeout: 2s
+        retries: 3
+  karaf-instance-1:
+    image: apache/karaf:4.2.7
+    command: ["sh", "-c", "cp /opt/apache-karaf/deploy/*.cfg /opt/apache-karaf/etc/; karaf run clean"]
+    volumes:
+      - ./karaf-instance-1/deploy:/opt/apache-karaf/deploy
+    ports:
+      - 1099:1099
+      - 8101:8101
+      - 4444:4444
+      - 8181:8181
+    depends_on: 
+      - zookeeper-instance
+  karaf-instance-2:
+    image: apache/karaf:4.2.7
+    command: ["sh", "-c", "cp /opt/apache-karaf/deploy/*.cfg /opt/apache-karaf/etc/; karaf run clean"]
+    volumes:
+      - ./karaf-instance-1/deploy:/opt/apache-karaf/deploy
+    ports:
+      - 2099:1099
+      - 9101:8101
+      - 5444:4444
+      - 9181:8181
+    depends_on: 
+      - zookeeper-instance
+  liferay-instance-1:
+    image: liferay/portal:7.3.3-ga4
+    volumes:
+      - ./liferay-instance-1/deploy:/etc/liferay/mount/deploy
+      - ./liferay-instance-1/files:/etc/liferay/mount/files
+    ports:
+      - 6080:8080
+      - 21311:11311
+      - 9201:9201
+    depends_on: 
+      - zookeeper-instance
