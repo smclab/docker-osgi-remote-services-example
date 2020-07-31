@@ -19,10 +19,7 @@ services:
     volumes:
       - ./karaf-instance-1/deploy:/opt/apache-karaf/deploy
     ports:
-      - 1099:1099
-      - 8101:8101
-      - 4444:4444
-      - 8181:8181
+      - 8101-8105:8101
     depends_on: 
       - zookeeper-instance
   karaf-instance-2:
@@ -31,10 +28,7 @@ services:
     volumes:
       - ./karaf-instance-1/deploy:/opt/apache-karaf/deploy
     ports:
-      - 2099:1099
-      - 9101:8101
-      - 5444:4444
-      - 9181:8181
+      - 8106-8110:8101
     depends_on: 
       - zookeeper-instance
   liferay-instance-1:
