@@ -1,4 +1,5 @@
 # Docker Compose Project for OSGi Remote µServices
+[![SMC Tech Blog](https://img.shields.io/badge/Mainteiner-SMC%20Tech%20Blog-blue)](https://techblog.smc.it) [![Twitter Follow](https://img.shields.io/twitter/follow/SMCpartner.svg?style=social&label=%40SMCpartner%20on%20Twitter&style=plastic)](https://twitter.com/SMCpartner) 
 
 This project refers to the article *What are OSGi Remote µServices* published 
 on the SMC [TechBlog](https://techblog.smc.it) blog.
@@ -19,7 +20,18 @@ The OSGi containers are already set up to support the OSGi Remote Services
 specification through the implementation of Apache Aries RSA (Remote Services
 Admin).
 
+Are you impatient? Well, then you could try Play-With-Docker ;-)
+
+[![Try in PWD](https://raw.githubusercontent.com/play-with-docker/stacks/master/assets/images/button.png)](https://labs.play-with-docker.com/?stack=https://raw.githubusercontent.com/smclab/docker-osgi-remote-services-example/master/docker-compose.yml) 
+
+
 ## 1. Quick Start
+I've tested this services task with the Docker Desktop Engine 19.03 and the 
+Docker Compose 1.26. The minimum of the resources to assign to Docker are: 
+
+1. Number of the CPUs >= 2 
+2. Memory >= 8 GByte
+
 You can start all services defined on the docker-compose.yml file through the 
 following command.
 
@@ -30,8 +42,17 @@ $ git clone https://github.com/smclab/docker-osgi-remote-services-example.git
 $ cd docker-osgi-remote-services-example
 
 # Start all services
-$ docker-compose up
+$ docker-compose up -d
+
+# Check logs
+$ docker-compose logs -f
+
 ```
+
+This clip show howto start all services
+
+[![asciicast](https://asciinema.org/a/350959.svg)](https://asciinema.org/a/350959)
+
 
 You  can see this output after the services brings up (output of the command 
 `docker-compose ps`).
@@ -107,6 +128,12 @@ it.smc.techblog.apache.aries.rsa.examples.whoiam.consumer_1.0.0.202007301439 [11
   No fragment bundles
   No required bundles
   ```
+
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to 
+discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
 
 ## License
 
