@@ -1,10 +1,15 @@
 # Docker Compose Project for OSGi Remote µServices
 
-This project refers to the article What are OSGi Remote µServices published 
+This project refers to the article *What are OSGi Remote µServices* published 
 on the SMC [TechBlog](https://techblog.smc.it) blog.
 
+For the OSGi bundles that you can see in this project, you will find the source 
+codes at this git repositories:
 
-This Docker Compose project brings up the following services:
+* [aries-rsa-whoiam-examples](https://github.com/smclab/aries-rsa-whoiam-examples)
+* [aries-rsa-raspberrypi-examples](https://github.com/smclab/aries-rsa-raspberrypi-examples)
+
+This Docker Compose project define the following services:
 
 1. Apache ZooKeeper
 2. Apache Karaf
@@ -15,14 +20,22 @@ specification through the implementation of Apache Aries RSA (Remote Services
 Admin).
 
 ## 1. Quick Start
-Start all services defined on the docker-compose.yml file.
+You can start all services defined on the docker-compose.yml file through the 
+following command.
 
 ```bash
+# Clone this repository project
+$ git clone https://github.com/smclab/docker-osgi-remote-services-example.git
+
+$ cd docker-osgi-remote-services-example
+
+# Start all services
 $ docker-compose up
-$ docker-compose ps
 ```
 
-You  can see this output after the services brings up.
+You  can see this output after the services brings up (output of the command 
+`docker-compose ps`).
+
 ```bash
                           Name                                        Command                       State                                                             Ports                                                  
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -60,7 +73,7 @@ ID │ State  │ Lvl │ Version            │ Name
 34 │ Active │  80 │ 4.2.7              │ Apache Karaf :: OSGi Services :: Event
 ```
 
-You can view Apache Aries (RSA) endpoints by *rsa:endpoints* command.
+You can view the Apache Aries (RSA) endpoints by *rsa:endpoints* command.
 
 ```bash
 karaf@root()> rsa:endpoints
@@ -77,7 +90,7 @@ You can connect to Liferay Gogo Shell via this command.
 $ telnet localhost 21311
 ```
 
-You can see output of the comand *b 1180* that show the Remote Service in use by
+You can see output of the comand *b 1180* that show the Remote Services in use by
 the consumer.
 
 ```bash
