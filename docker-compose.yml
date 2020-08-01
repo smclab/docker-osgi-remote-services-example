@@ -26,7 +26,7 @@ services:
     image: apache/karaf:4.2.7
     command: ["sh", "-c", "cp /opt/apache-karaf/deploy/*.cfg /opt/apache-karaf/etc/; karaf run clean"]
     volumes:
-      - ./karaf-instance-1/deploy:/opt/apache-karaf/deploy
+      - ./karaf-instance-2/deploy:/opt/apache-karaf/deploy
     ports:
       - 8106-8110:8101
     depends_on: 
