@@ -4,7 +4,7 @@
 This project refers to the article *What are OSGi Remote µServices* published 
 on the SMC [TechBlog](https://techblog.smc.it) blog.
 
-For the OSGi bundles that you can see in this project, you will find the source 
+For the OSGi bundles that you can see in this projects, you will find the source 
 codes at this git repositories:
 
 * [aries-rsa-whoiam-examples](https://github.com/smclab/aries-rsa-whoiam-examples)
@@ -13,12 +13,14 @@ codes at this git repositories:
 This Docker Compose project define the following services:
 
 1. Apache ZooKeeper
-2. Apache Karaf
+2. Apache Karaf (two instance)
 3. Liferay Portal 7.3 GA4
 
 The OSGi containers are already set up to support the OSGi Remote Services 
 specification through the implementation of Apache Aries RSA (Remote Services
-Admin).
+Admin).The following diagram shows the scenario implemented by this project's Docker Compose.
+
+[![Docker Services](docs/images/scenario-osgi-remote-service-1.png)](https://techblog.smc.it)
 
 Are you impatient? Well, then you could try Play-With-Docker ;-)
 
@@ -51,27 +53,27 @@ $ docker-compose logs -f
 
 This clip show howto start all services
 
-[![asciicast](https://asciinema.org/a/350959.svg)](https://asciinema.org/a/350959)
+[![asciicast](https://asciinema.org/a/351174.svg)](https://asciinema.org/a/351174)
 
 
 You  can see this output after the services brings up (output of the command 
 `docker-compose ps`).
 
 ```bash
-                          Name                                        Command                       State                                                             Ports                                                  
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-docker-osgi-remote-services-example_karaf-instance-1_1     sh -c cp /opt/apache-karaf ...   Up                      0.0.0.0:1099->1099/tcp, 0.0.0.0:4444->4444/tcp, 44444/tcp, 0.0.0.0:8101->8101/tcp, 0.0.0.0:8181->8181/tcp
-docker-osgi-remote-services-example_karaf-instance-2_1     sh -c cp /opt/apache-karaf ...   Up                      0.0.0.0:2099->1099/tcp, 0.0.0.0:5444->4444/tcp, 44444/tcp, 0.0.0.0:9101->8101/tcp, 0.0.0.0:9181->8181/tcp
-docker-osgi-remote-services-example_liferay-instance-1_1   /bin/sh -c /usr/local/bin/ ...   Up (health: starting)   0.0.0.0:21311->11311/tcp, 8000/tcp, 8009/tcp, 0.0.0.0:6080->8080/tcp, 0.0.0.0:9201->9201/tcp             
-docker-osgi-remote-services-example_zookeeper-instance_1   /docker-entrypoint.sh zkSe ...   Up (healthy)            0.0.0.0:2181->2181/tcp, 2888/tcp, 3888/tcp, 0.0.0.0:9080->8080/tcp                                       
+                          Name                                        Command                       State                                                      Ports
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+docker-osgi-remote-services-example_karaf-instance-1_1     sh -c cp /opt/apache-karaf ...   Up                      1099/tcp, 44444/tcp, 0.0.0.0:8103->8101/tcp, 8181/tcp
+docker-osgi-remote-services-example_karaf-instance-2_1     sh -c cp /opt/apache-karaf ...   Up                      1099/tcp, 44444/tcp, 0.0.0.0:8109->8101/tcp, 8181/tcp
+docker-osgi-remote-services-example_liferay-instance-1_1   /bin/sh -c /usr/local/bin/ ...   Up (health)   0.0.0.0:21311->11311/tcp, 8000/tcp, 8009/tcp, 0.0.0.0:6080->8080/tcp, 0.0.0.0:9201->9201/tcp
+docker-osgi-remote-services-example_zookeeper-instance_1   /docker-entrypoint.sh zkSe ...   Up (healthy)            0.0.0.0:2181->2181/tcp, 2888/tcp, 3888/tcp, 0.0.0.0:9080->8080/tcp
 ```
 
 You can connect to Apache Karaf instance via this commands. The default password
 is: *karaf*
 
 ```bash
-$ ssh -p 8101 karaf@127.0.0.1 
-$ ssh -p 9101 karaf@127.0.0.1 
+$ ssh -p 8103 karaf@127.0.0.1
+$ ssh -p 8109 karaf@127.0.0.1
 ```
 
 You can view the installed bundle by *list* command.
@@ -98,11 +100,12 @@ You can view the Apache Aries (RSA) endpoints by *rsa:endpoints* command.
 
 ```bash
 karaf@root()> rsa:endpoints
-Endpoints for framework fbd31e60-c578-49c2-b0b9-bc15e8479586
-id                    | interfaces                                                           | framework                            | comp name                                                                 
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-tcp://172.29.0.4:8202 | [it.smc.techblog.apache.aries.rsa.examples.whoiam.api.WhoIamService] | fbd31e60-c578-49c2-b0b9-bc15e8479586 | it.smc.techblog.apache.aries.rsa.examples.whoiam.service.WhoIamServiceImpl
-tcp://172.29.0.5:8202 | [it.smc.techblog.apache.aries.rsa.examples.whoiam.api.WhoIamService] | 118de5a0-e754-4a35-a3f1-adbf78c8b36f | it.smc.techblog.apache.aries.rsa.examples.whoiam.service.WhoIamServiceImpl
+Endpoints for framework a59e01f5-f587-4068-80cf-963d0219c2c4
+id                        | interfaces                                                                     | framework                            | comp name
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+tcp://172.22.0.3:8202     | [it.smc.techblog.apache.aries.rsa.examples.whoiam.api.WhoIamService]           | a59e01f5-f587-4068-80cf-963d0219c2c4 | it.smc.techblog.apache.aries.rsa.examples.whoiam.service.WhoIamServiceImpl
+tcp://192.168.43.185:8203 | [it.smc.techblog.apache.aries.rsa.examples.raspberrypi.api.RaspberryPiService] | 5a6b8cfe-9a75-40bf-9a7b-2bb4cb33942e | it.smc.techblog.apache.aries.rsa.examples.raspberrypi.service.RaspberryPiServiceImpl
+tcp://172.22.0.5:8202     | [it.smc.techblog.apache.aries.rsa.examples.whoiam.api.WhoIamService]           | ff72cd20-668e-4806-9063-8a052328c254 | it.smc.techblog.apache.aries.rsa.examples.whoiam.service.WhoIamServiceImpl
 ```
 
 You can connect to Liferay Gogo Shell via this command.
