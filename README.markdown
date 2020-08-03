@@ -1,7 +1,7 @@
 # Docker Compose Project for OSGi Remote µServices
 [![SMC Tech Blog](https://img.shields.io/badge/Mainteiner-SMC%20Tech%20Blog-blue)](https://techblog.smc.it) [![Twitter Follow](https://img.shields.io/twitter/follow/SMCpartner.svg?style=social&label=%40SMCpartner%20on%20Twitter&style=plastic)](https://twitter.com/SMCpartner) 
 
-This project refers to the article *What are OSGi Remote µServices* published 
+This project refers to the article [What are OSGi Remote µServices](https://techblog.smc.it/it/2020-07-31/cosa-sono-osgi-remote-services) published 
 on the SMC [TechBlog](https://techblog.smc.it) blog.
 
 For the OSGi bundles that you can see in this projects, you will find the source 
