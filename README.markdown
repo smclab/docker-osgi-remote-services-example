@@ -259,7 +259,7 @@ $ mvn dependency:get \
     -Dtransitive=false \
     -Ddest=it.smc.techblog.apache.aries.rsa.examples.whoiam.cosumer.jar
 
-# Download for Who I am Services bundles (API, Service, Consumer)
+# Download for Raspberry Pi Services bundles (API, Service, Consumer)
 $ mvn dependency:get \
     -DremoteRepositories=github::default::https://maven.pkg.github.com/smclab/aries-rsa-raspberrypi-examples  \
     -Dartifact=it.smc.techblog.apache.aries.rsa.examples:it.smc.techblog.apache.aries.rsa.examples.raspberrypi.api:LATEST:jar \
