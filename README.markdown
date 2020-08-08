@@ -181,7 +181,7 @@ karaf-instance-1_1    | 22:37:43.330 INFO  [fileinstall-/opt/apache-karaf-4.2.7/
 ```
 
 On the logs you will also find everything that triggered the bundle update. 
-**Remember that we are in the context of OSGi Remote Services!*
+**Remember that we are in the context of OSGi Remote Services!**
 
 ```bash
 karaf-instance-1_1    | 22:37:43.409 INFO  [FelixFrameworkWiring] Received ServiceEvent type: unregistering, sref: [it.smc.techblog.apache.aries.rsa.examples.whoiam.api.WhoIamService]
