@@ -22,11 +22,6 @@ Admin).The following diagram shows the scenario implemented by this project's Do
 
 [![Docker Services](docs/images/scenario-osgi-remote-service-1.png)](https://techblog.smc.it)
 
-Are you impatient? Well, then you could try Play-With-Docker ;-)
-
-[![Try in PWD](https://raw.githubusercontent.com/play-with-docker/stacks/master/assets/images/button.png)](https://labs.play-with-docker.com/?stack=https://raw.githubusercontent.com/smclab/docker-osgi-remote-services-example/master/docker-compose.yml) 
-
-
 ## 1. Quick Start
 I've tested this services task with the Docker Desktop Engine 19.03 and the 
 Docker Compose 1.26. The minimum of the resources to assign to Docker are: 
